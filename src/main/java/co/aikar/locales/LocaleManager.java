@@ -1,20 +1,15 @@
 package co.aikar.locales;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import javax.annotation.Nonnull;
+import java.util.*;
 import java.util.function.Function;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public class LocaleManager <T> {
+public class LocaleManager<T> {
     //private volatile Reflections resourceScanner;
     private final Function<T, Locale> localeMapper;
-    private Locale defaultLocale;
     private final Map<Locale, LanguageTable> tables = new HashMap<>();
+    private Locale defaultLocale;
 
     LocaleManager(Function<T, Locale> localeMapper, Locale defaultLocale) {
         this.localeMapper = localeMapper;
@@ -22,21 +17,19 @@ public class LocaleManager <T> {
     }
 
     /**
-     *
      * @param localeMapper Mapper to map a context to Locale
-     * @param <T> Context Class Type
+     * @param <T>          Context Class Type
      */
-    public static <T> LocaleManager<T> create(@NotNull Function<T, Locale> localeMapper) {
+    public static <T> LocaleManager<T> create(@Nonnull Function<T, Locale> localeMapper) {
         return new LocaleManager<>(localeMapper, Locale.ENGLISH);
     }
 
     /**
-     *
-     * @param localeMapper Mapper to map a context to Locale
+     * @param localeMapper  Mapper to map a context to Locale
      * @param defaultLocale Default Locale
-     * @param <T> Context Class Type
+     * @param <T>           Context Class Type
      */
-    public static <T> LocaleManager<T> create(@NotNull Function<T, Locale> localeMapper, Locale defaultLocale) {
+    public static <T> LocaleManager<T> create(@Nonnull Function<T, Locale> localeMapper, Locale defaultLocale) {
         return new LocaleManager<>(localeMapper, defaultLocale);
     }
 
@@ -54,13 +47,13 @@ public class LocaleManager <T> {
      * If a list of locales is supplied, loads the matching message bundle for each locale.
      * If none are supplied, just the default locale is loaded.
      */
-    public boolean addMessageBundle(@NotNull String bundleName, @NotNull Locale... locales) {
+    public boolean addMessageBundle(@Nonnull String bundleName, @Nonnull Locale... locales) {
         return this.addMessageBundle(this.getClass().getClassLoader(), bundleName, locales);
     }
 
-    public boolean addMessageBundle(@NotNull ClassLoader classLoader, @NotNull String bundleName, @NotNull Locale... locales) {
+    public boolean addMessageBundle(@Nonnull ClassLoader classLoader, @Nonnull String bundleName, @Nonnull Locale... locales) {
         if (locales.length == 0) {
-            locales = new Locale[] {defaultLocale};
+            locales = new Locale[]{defaultLocale};
         }
         boolean found = false;
         for (Locale locale : locales) {
@@ -72,15 +65,15 @@ public class LocaleManager <T> {
         return found;
     }
 
-    public void addMessages(@NotNull Locale locale, @NotNull Map<MessageKey, String> messages) {
+    public void addMessages(@Nonnull Locale locale, @Nonnull Map<MessageKey, String> messages) {
         getTable(locale).addMessages(messages);
     }
 
-    public String addMessage(@NotNull Locale locale, @NotNull MessageKey key, @NotNull String message) {
+    public String addMessage(@Nonnull Locale locale, @Nonnull MessageKey key, @Nonnull String message) {
         return getTable(locale).addMessage(key, message);
     }
 
-    public String getMessage(T context, @NotNull MessageKey key) {
+    public String getMessage(T context, @Nonnull MessageKey key) {
         Locale locale = localeMapper.apply(context);
 
         String message = getTable(locale).getMessage(key);
@@ -95,7 +88,8 @@ public class LocaleManager <T> {
         return message;
     }
 
-    public @NotNull LanguageTable getTable(@NotNull Locale locale) {
+    public @Nonnull
+    LanguageTable getTable(@Nonnull Locale locale) {
         return tables.computeIfAbsent(locale, LanguageTable::new);
     }
 

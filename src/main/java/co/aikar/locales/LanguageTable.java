@@ -1,7 +1,6 @@
 package co.aikar.locales;
 
-import org.jetbrains.annotations.NotNull;
-
+import javax.annotation.Nonnull;
 import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
@@ -22,7 +21,7 @@ public class LanguageTable {
         return messages.get(key);
     }
 
-    public void addMessages(@NotNull Map<MessageKey, String> messages) {
+    public void addMessages(@Nonnull Map<MessageKey, String> messages) {
         this.messages.putAll(messages);
     }
 
@@ -43,7 +42,7 @@ public class LanguageTable {
     }
 
     public boolean addResourceBundle(ResourceBundle bundle) {
-        for(String key: bundle.keySet()) {
+        for (String key : bundle.keySet()) {
             addMessage(MessageKey.of(key), bundle.getString(key));
         }
 
