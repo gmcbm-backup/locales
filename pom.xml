@@ -159,7 +159,6 @@
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <preparationGoals>clean verify</preparationGoals>
-
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
