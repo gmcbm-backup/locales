@@ -6,8 +6,6 @@
 [![Codecov](https://img.shields.io/codecov/c/gh/gmcbm-backup/locales?label=Coverage&logo=codecov)](https://app.codecov.io/gh/gmcbm-backup/locales)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/gmcbm-backup/locales?label=Maintainability)](https://codeclimate.com/github/gmcbm-backup/locales)
 [![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/gmcbm-backup/locales?label=Vulnerabilities)](https://snyk.io/test/github/gmcbm-backup/locales)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/gmcbm-backup/locales?logo=lgtm)](https://lgtm.com/projects/g/gmcbm-backup/locales/alerts/)
-[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/gmcbm-backup/locales?logo=lgtm)](https://lgtm.com/projects/g/gmcbm-backup/locales/context:java)
 [![License](https://img.shields.io/github/license/gmcbm-backup/locales?label=License)](https://github.com/gmcbm-backup/locales/blob/master/LICENSE)
 
 ---
