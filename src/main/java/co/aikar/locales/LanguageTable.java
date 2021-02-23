@@ -1,23 +1,25 @@
 package co.aikar.locales;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.*;
 
-@SuppressWarnings("WeakerAccess")
 public class LanguageTable {
 
     private final Locale locale;
     private final Map<MessageKey, String> messages = new HashMap<>();
 
-    LanguageTable(Locale locale) {
+    LanguageTable(@Nonnull Locale locale) {
         this.locale = locale;
     }
 
-    public String addMessage(MessageKey key, String message) {
-        return messages.put(key, message);
+    public @Nonnull
+    String addMessage(@Nonnull MessageKey key, @Nonnull String message) {
+        return Objects.requireNonNull(messages.put(key, message));
     }
 
-    public String getMessage(MessageKey key) {
+    public @Nullable
+    String getMessage(@Nonnull MessageKey key) {
         return messages.get(key);
     }
 
@@ -25,23 +27,25 @@ public class LanguageTable {
         this.messages.putAll(messages);
     }
 
-    public Locale getLocale() {
+    public @Nonnull
+    Locale getLocale() {
         return locale;
     }
 
-    public boolean addMessageBundle(String bundleName) {
-        return this.addMessageBundle(this.getClass().getClassLoader(), bundleName);
+    public boolean addMessageBundle(@Nonnull String bundleName) {
+        return this.addMessageBundle(Thread.currentThread().getContextClassLoader(), bundleName);
     }
 
-    public boolean addMessageBundle(ClassLoader classLoader, String bundleName) {
+    public boolean addMessageBundle(@Nonnull ClassLoader classLoader, @Nonnull String bundleName) {
         try {
-            return this.addResourceBundle(ResourceBundle.getBundle(bundleName, this.locale, classLoader, new UTF8Control()));
+            return this.addResourceBundle(ResourceBundle.getBundle(bundleName, this.locale,
+                    classLoader, new UTF8Control()));
         } catch (MissingResourceException e) {
             return false;
         }
     }
 
-    public boolean addResourceBundle(ResourceBundle bundle) {
+    public boolean addResourceBundle(@Nonnull ResourceBundle bundle) {
         for (String key : bundle.keySet()) {
             addMessage(MessageKey.of(key), bundle.getString(key));
         }

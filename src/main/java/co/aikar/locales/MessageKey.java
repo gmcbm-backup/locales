@@ -1,16 +1,18 @@
 package co.aikar.locales;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MessageKey implements MessageKeyProvider {
+public final class MessageKey implements MessageKeyProvider {
+
     private static final AtomicInteger counter = new AtomicInteger(1);
     private static final Map<String, MessageKey> keyMap = new ConcurrentHashMap<>();
     private final int id = counter.getAndIncrement();
     private final String key;
 
-    private MessageKey(String key) {
+    private MessageKey(@Nonnull String key) {
         this.key = key;
     }
 
@@ -27,12 +29,14 @@ public class MessageKey implements MessageKeyProvider {
         return (this == o);
     }
 
-    public String getKey() {
+    public @Nonnull
+    String getKey() {
         return key;
     }
 
     @Override
-    public MessageKey getMessageKey() {
+    public @Nonnull
+    MessageKey getMessageKey() {
         return this;
     }
 }

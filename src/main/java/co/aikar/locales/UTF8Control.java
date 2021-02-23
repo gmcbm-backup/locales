@@ -1,5 +1,7 @@
 package co.aikar.locales;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,10 +12,13 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-//https://stackoverflow.com/questions/4659929/how-to-use-utf-8-in-resource-properties-with-resourcebundle/4660195#4660195
+// https://stackoverflow.com/questions/4659929/how-to-use-utf-8-in-resource-properties-with-resourcebundle/4660195#4660195
 class UTF8Control extends ResourceBundle.Control {
 
-    public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload) throws IOException {
+    @Override
+    public @Nullable
+    ResourceBundle newBundle(@Nonnull String baseName, @Nonnull Locale locale, @Nonnull String format,
+                             @Nonnull ClassLoader loader, boolean reload) throws IOException {
         // The below is a copy of the default implementation.
         String bundleName = toBundleName(baseName, locale);
         String resourceName = toResourceName(bundleName, "properties");
@@ -31,6 +36,7 @@ class UTF8Control extends ResourceBundle.Control {
         } else {
             stream = loader.getResourceAsStream(resourceName);
         }
+
         if (stream != null) {
             try {
                 // Only this line is changed to make it to read properties files as UTF-8.
