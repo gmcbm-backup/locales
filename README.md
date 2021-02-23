@@ -7,7 +7,7 @@
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/gmcbm-backup/locales?label=Maintainability)](https://codeclimate.com/github/gmcbm-backup/locales)
 [![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/gmcbm-backup/locales?label=Vulnerabilities)](https://snyk.io/test/github/gmcbm-backup/locales)
 [![License](https://img.shields.io/github/license/gmcbm-backup/locales?label=License)](https://github.com/gmcbm-backup/locales/blob/master/LICENSE)
-
+![Maven Central](https://img.shields.io/maven-central/v/net.gmcbm.dependencies/locales)
 ---
 
 ## Description
