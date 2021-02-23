@@ -4,7 +4,7 @@
 
     <groupId>net.gmcbm.dependencies</groupId>
     <artifactId>locales</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Locales</name>
@@ -24,7 +24,7 @@
         <connection>scm:git:git://github.com/gmcbm-backup/locales.git</connection>
         <developerConnection>scm:git:git@github.com:gmcbm-backup/locales.git</developerConnection>
         <url>https://github.com/gmcbm-backup/locales</url>
-        <tag>v1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
