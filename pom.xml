@@ -157,9 +157,12 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>3.0.0-M1</version>
                 <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <scmCommentPrefix xml:space="preserve">[RELEASE] </scmCommentPrefix>
                     <preparationGoals>clean verify</preparationGoals>
-                    <localCheckout>true</localCheckout>
+                    <completionGoals>clean install</completionGoals>
+                    <releaseProfiles>release-sign-artifacts</releaseProfiles>
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                 </configuration>
@@ -203,12 +206,6 @@
         <!-- GPG Signature on release -->
         <profile>
             <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
