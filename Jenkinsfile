@@ -11,7 +11,7 @@ pipeline {
             }
             steps {
                 echo 'Building..'
-				sh 'mvn clean package -Djar.finalName=Locales-${GIT_BRANCH#*/}-#${BUILD_NUMBER}'
+				sh 'mvn clean package'
             }
             post {
                 success {
