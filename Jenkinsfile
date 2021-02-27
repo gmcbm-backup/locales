@@ -11,7 +11,7 @@ pipeline {
             }
             steps {
                 echo 'Building..'
-				sh 'mvn clean package'
+                sh 'mvn clean package'
             }
             post {
                 success {
@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 echo 'Building..'
-				sh 'mvn clean verify'
+                sh 'mvn clean verify'
             }
         }
     }
