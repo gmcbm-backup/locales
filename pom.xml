@@ -8,7 +8,9 @@
     <packaging>jar</packaging>
 
     <name>Locales</name>
-    <description>A Java Locale Manager that supports managing multiple languages and contextual locale preference (IE: Different players on a multiplayer game server)</description>
+    <description>A Java Locale Manager that supports managing multiple languages and contextual locale preference (IE:
+        Different players on a multiplayer game server)
+    </description>
     <url>https://github.com/gmcbm-backup/locales</url>
     <inceptionYear>2017</inceptionYear>
 
