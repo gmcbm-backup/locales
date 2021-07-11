@@ -25,15 +25,15 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'mvn -B test'
-            }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml'
-                }
-            }
-        }
+#        stage('Test') {
+#            steps {
+#                sh 'mvn -B test'
+#            }
+#            post {
+#                always {
+#                    junit '**/target/surefire-reports/*.xml'
+#                }
+#            }
+#        }
     }
 }
