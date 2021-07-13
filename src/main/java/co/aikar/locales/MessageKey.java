@@ -1,6 +1,7 @@
 package co.aikar.locales;
 
-import javax.annotation.Nonnull;
+import lombok.Getter;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -10,9 +11,10 @@ public final class MessageKey implements MessageKeyProvider {
     private static final AtomicInteger counter = new AtomicInteger(1);
     private static final Map<String, MessageKey> keyMap = new ConcurrentHashMap<>();
     private final int id = counter.getAndIncrement();
+    @Getter
     private final String key;
 
-    private MessageKey(@Nonnull String key) {
+    private MessageKey(String key) {
         this.key = key;
     }
 
@@ -29,14 +31,8 @@ public final class MessageKey implements MessageKeyProvider {
         return (this == o);
     }
 
-    public @Nonnull
-    String getKey() {
-        return key;
-    }
-
     @Override
-    public @Nonnull
-    MessageKey getMessageKey() {
+    public MessageKey getMessageKey() {
         return this;
     }
 }
