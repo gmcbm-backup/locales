@@ -1,6 +1,5 @@
 package co.aikar.locales;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,8 +16,8 @@ class UTF8Control extends ResourceBundle.Control {
 
     @Override
     public @Nullable
-    ResourceBundle newBundle(@Nonnull String baseName, @Nonnull Locale locale, @Nonnull String format,
-                             @Nonnull ClassLoader loader, boolean reload) throws IOException {
+    ResourceBundle newBundle(String baseName, Locale locale, String format,
+                             ClassLoader loader, boolean reload) throws IOException {
         // The below is a copy of the default implementation.
         String bundleName = toBundleName(baseName, locale);
         String resourceName = toResourceName(bundleName, "properties");
