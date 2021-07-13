@@ -1,6 +1,7 @@
 package co.aikar.locales;
 
-import javax.annotation.Nonnull;
+import lombok.Getter;
+
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Function;
@@ -9,9 +10,10 @@ public class LocaleManager<T> {
 
     private final Function<T, Locale> localeMapper;
     private final Map<Locale, LanguageTable> tables = new HashMap<>();
+    @Getter
     private Locale defaultLocale;
 
-    LocaleManager(@Nonnull Function<T, Locale> localeMapper, @Nonnull Locale defaultLocale) {
+    LocaleManager(Function<T, Locale> localeMapper, Locale defaultLocale) {
         this.localeMapper = localeMapper;
         this.defaultLocale = defaultLocale;
     }
@@ -20,7 +22,7 @@ public class LocaleManager<T> {
      * @param localeMapper Mapper to map a context to Locale
      * @param <T>          Context Class Type
      */
-    public static <T> LocaleManager<T> create(@Nonnull Function<T, Locale> localeMapper) {
+    public static <T> LocaleManager<T> create(Function<T, Locale> localeMapper) {
         return new LocaleManager<>(localeMapper, Locale.ENGLISH);
     }
 
@@ -29,18 +31,12 @@ public class LocaleManager<T> {
      * @param defaultLocale Default Locale
      * @param <T>           Context Class Type
      */
-    public static <T> LocaleManager<T> create(@Nonnull Function<T, Locale> localeMapper,
-                                              @Nonnull Locale defaultLocale) {
+    public static <T> LocaleManager<T> create(Function<T, Locale> localeMapper,
+                                              Locale defaultLocale) {
         return new LocaleManager<>(localeMapper, defaultLocale);
     }
 
-    public @Nonnull
-    Locale getDefaultLocale() {
-        return defaultLocale;
-    }
-
-    public @Nonnull
-    Locale setDefaultLocale(@Nonnull Locale defaultLocale) {
+    public Locale setDefaultLocale(Locale defaultLocale) {
         Locale previous = this.defaultLocale;
         this.defaultLocale = defaultLocale;
         return previous;
@@ -50,12 +46,12 @@ public class LocaleManager<T> {
      * If a list of locales is supplied, loads the matching message bundle for each locale.
      * If none are supplied, just the default locale is loaded.
      */
-    public boolean addMessageBundle(@Nonnull String bundleName, @Nonnull Locale... locales) {
+    public boolean addMessageBundle(String bundleName, Locale... locales) {
         return this.addMessageBundle(Thread.currentThread().getContextClassLoader(), bundleName, locales);
     }
 
-    public boolean addMessageBundle(@Nonnull ClassLoader classLoader, @Nonnull String bundleName,
-                                    @Nonnull Locale... locales) {
+    public boolean addMessageBundle(ClassLoader classLoader, String bundleName,
+                                    Locale... locales) {
         if (locales.length == 0) {
             locales = new Locale[]{defaultLocale};
         }
@@ -69,17 +65,16 @@ public class LocaleManager<T> {
         return found;
     }
 
-    public void addMessages(@Nonnull Locale locale, @Nonnull Map<MessageKey, String> messages) {
+    public void addMessages(Locale locale, Map<MessageKey, String> messages) {
         getTable(locale).addMessages(messages);
     }
 
-    public @Nonnull
-    String addMessage(@Nonnull Locale locale, @Nonnull MessageKey key, @Nonnull String message) {
+    public String addMessage(Locale locale, MessageKey key, String message) {
         return getTable(locale).addMessage(key, message);
     }
 
     public @Nullable
-    String getMessage(@Nonnull T context, @Nonnull MessageKey key) {
+    String getMessage(T context, MessageKey key) {
         Locale locale = localeMapper.apply(context);
 
         String message = getTable(locale).getMessage(key);
@@ -94,12 +89,11 @@ public class LocaleManager<T> {
         return message;
     }
 
-    public @Nonnull
-    LanguageTable getTable(@Nonnull Locale locale) {
+    public LanguageTable getTable(Locale locale) {
         return tables.computeIfAbsent(locale, LanguageTable::new);
     }
 
-    public boolean addResourceBundle(@Nonnull ResourceBundle bundle, @Nonnull Locale locale) {
+    public boolean addResourceBundle(ResourceBundle bundle, Locale locale) {
         return this.getTable(locale).addResourceBundle(bundle);
     }
 }
