@@ -1,42 +1,38 @@
 package co.aikar.locales;
 
-import javax.annotation.Nonnull;
+import lombok.Getter;
+
 import javax.annotation.Nullable;
 import java.util.*;
 
 public class LanguageTable {
 
+    @Getter
     private final Locale locale;
     private final Map<MessageKey, String> messages = new HashMap<>();
 
-    LanguageTable(@Nonnull Locale locale) {
+    LanguageTable(Locale locale) {
         this.locale = locale;
     }
 
-    public @Nonnull
-    String addMessage(@Nonnull MessageKey key, @Nonnull String message) {
+    public String addMessage(MessageKey key, String message) {
         return Objects.requireNonNull(messages.put(key, message));
     }
 
     public @Nullable
-    String getMessage(@Nonnull MessageKey key) {
+    String getMessage(MessageKey key) {
         return messages.get(key);
     }
 
-    public void addMessages(@Nonnull Map<MessageKey, String> messages) {
+    public void addMessages(Map<MessageKey, String> messages) {
         this.messages.putAll(messages);
     }
 
-    public @Nonnull
-    Locale getLocale() {
-        return locale;
-    }
-
-    public boolean addMessageBundle(@Nonnull String bundleName) {
+    public boolean addMessageBundle(String bundleName) {
         return this.addMessageBundle(Thread.currentThread().getContextClassLoader(), bundleName);
     }
 
-    public boolean addMessageBundle(@Nonnull ClassLoader classLoader, @Nonnull String bundleName) {
+    public boolean addMessageBundle(ClassLoader classLoader, String bundleName) {
         try {
             return this.addResourceBundle(ResourceBundle.getBundle(bundleName, this.locale,
                     classLoader, new UTF8Control()));
@@ -45,7 +41,7 @@ public class LanguageTable {
         }
     }
 
-    public boolean addResourceBundle(@Nonnull ResourceBundle bundle) {
+    public boolean addResourceBundle(ResourceBundle bundle) {
         for (String key : bundle.keySet()) {
             addMessage(MessageKey.of(key), bundle.getString(key));
         }
