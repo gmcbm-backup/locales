@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.gmcbm.dependencies</groupId>
@@ -66,14 +67,24 @@
         <ci.build.version>${project.version}</ci.build.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+        <!-- Dependency Versions [Annotation] -->
+        <dependency.jsr305.version>3.0.2</dependency.jsr305.version>
+        <dependency.lombok.version>1.18.20</dependency.lombok.version>
     </properties>
 
     <dependencies>
-        <!-- Annotation -->
+        <!-- JSR305 [Annotation] -->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
+            <version>${dependency.jsr305.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Lombok [Annotation] -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${dependency.lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
