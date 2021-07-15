@@ -16,7 +16,7 @@ public class LanguageTable {
     }
 
     public String addMessage(MessageKey key, String message) {
-        return Objects.requireNonNull(messages.put(key, message));
+        return messages.put(key, message);
     }
 
     public @Nullable
